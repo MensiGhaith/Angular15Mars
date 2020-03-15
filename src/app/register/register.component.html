@@ -1,0 +1,134 @@
+{{ user | json }}
+
+<div class="myform">
+  <h3 style="color:white;">Création d'un compte</h3>
+  <div [hidden]="submitted" style="width: 400px;">
+    <form
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+      data-aos="fade-up"
+    >
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nom"
+          required
+          [(ngModel)]="user.nom"
+          name="nom"
+          #nom="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && nom.invalid }"
+        />
+        <div *ngIf="f.submitted && nom.invalid" class="invalid-feedback">
+          <div *ngIf="nom.errors.required">
+            Veuillez remplir le champ ""Nom""
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="prenom">Prénom</label>
+        <input
+          type="text"
+          class="form-control"
+          id="prenom"
+          required
+          [(ngModel)]="user.prenom"
+          name="prenom"
+          #prenom="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && prenom.invalid }"
+        />
+        <div *ngIf="f.submitted && prenom.invalid" class="invalid-feedback">
+          <div *ngIf="prenom.errors.required">
+            Veuillez remplir le champ ""Prenom""
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          [type]="hide ? 'password' : 'text'"
+          required
+          [(ngModel)]="user.password"
+          name="password"
+          #password="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
+        />
+        <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+          <div *ngIf="password.errors.required">
+            Veuillez remplir le champ ""Password""
+          </div>
+          <div *ngIf="password.errors.minlength">
+            Password doit être composer d'au moins 6 caractères
+          </div>
+        </div>
+
+        <div id="toggle" (click)="hide = !hide"></div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          [(ngModel)]="user.email"
+          name="email"
+          [(ngModel)]="model.email"
+          #email="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+          required
+          email
+        />
+        <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+          <div *ngIf="email.errors.required">
+            Veuillez remplir le champ ""Email""
+          </div>
+          <div *ngIf="email.errors.email">
+            Email doit être valid
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-13">
+        <label for="roles">Role</label>
+        <select
+          id="roles"
+          class="form-control"
+          name="roles"
+          [(ngModel)]="user.roles"
+          #roles="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && roles.invalid }"
+        >
+          <option value="GP">GP</option>
+          <option value="DATAHUB">DATAHUB</option>
+          <option value="COMET">COMET</option>
+          <option value="ADMIN">ADMIN</option>
+        </select>
+      </div>
+      <div *ngIf="f.submitted && roles.invalid" class="invalid-feedback">
+        <div *ngIf="roles.errors.required">
+          Veuillez selectionner votre rôle
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-success"
+        style="background-color: #09c0a3;"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+
+  <div [hidden]="!submitted" style="color:white;">
+    <h4>You submitted successfully!</h4>
+    <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
+  </div>
+</div>

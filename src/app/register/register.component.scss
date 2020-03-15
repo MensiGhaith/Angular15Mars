@@ -1,0 +1,31 @@
+.myform {
+  position: relative;
+  z-index: 1;
+  background: #2f3238;
+  max-width: 500px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+input {
+  color: white !important;
+}
+
+select#role.form-control {
+  color: white !important;
+}
+option {
+  color: black !important;
+}
+#toggle {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  background: url(assets/img/show2.png);
+  background-size: cover;
+  cursor: pointer;
+}

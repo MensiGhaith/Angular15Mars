@@ -1,0 +1,49 @@
+<div id="pricing-table" class="clear" data-aos="fade-right">
+  <div class="sel">
+    <div class="row">
+      <div class="col" style="left:-160px;">
+        <input
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="tag"
+          (input)="Search()"
+          style="margin:20px;
+       
+          
+          "
+        />
+        <div
+          id="toggle"
+          style="
+      
+        left: 450px;
+    "
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="plan"
+    *ngFor="let file of files | paginate: { itemsPerPage: 8, currentPage: p }"
+  >
+    <h3></h3>
+    <button class="btn" style="background-color:#09c0a3;">Ouvrir</button>
+    <ul>
+      <li><b>Name: </b> {{ file.fileName }}</li>
+      <li><b>Type: </b> {{ file.fileType }}</li>
+      <li><b>Catégorie: </b>{{ file.categorie }}</li>
+      <li><b>Tag: </b>{{ file.fileTag }}</li>
+      <li>
+        <b>Description: </b>
+        <p>
+          {{ file.fileDescription }}
+        </p>
+      </li>
+    </ul>
+  </div>
+  <pagination-controls
+    (pageChange)="p = $event"
+    style="float:right;"
+  ></pagination-controls>
+</div>

@@ -1,0 +1,70 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-plain" data-aos="fade-right">
+          <div class="card-header " style="background-color: #09c0a3;">
+            <h4 class="card-title mt-0" style="color:white;">
+              Tableau des Utilisateurs
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead class="">
+                  <th>
+                    ID
+                  </th>
+                  <th>
+                    Nom
+                  </th>
+                  <th>
+                    Prénom
+                  </th>
+                  <th>
+                    Email
+                  </th>
+                  <th>
+                    Role
+                  </th>
+                  <th>
+                    Actions
+                  </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let u of users">
+                    <td>
+                      {{ u.id }}
+                    </td>
+                    <td>
+                      {{ u.nom }}
+                    </td>
+                    <td>
+                      {{ u.prenom }}
+                    </td>
+                    <td>{{ u.email }}</td>
+                    <td>
+                      <span *ngFor="let r of u.roles">{{ r }} </span>
+                    </td>
+                    <td>
+                      <button
+                        class="btn btn-danger "
+                        (click)="deleteEmployee(u.id)"
+                      >
+                        Supprimer
+                      </button>
+
+                      <button class="btn " (click)="OnEdit(u.id)">
+                        Details
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
