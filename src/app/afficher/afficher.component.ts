@@ -64,9 +64,9 @@ export class AfficherComponent implements OnInit {
       this.retrieveResonse = res;
       this.base64Data = this.retrieveResonse.fileContent;
       if (
-        this.retrieveResonse.fileType == "jpg" ||
-        this.retrieveResonse.fileType == "PNG" ||
-        this.retrieveResonse.fileType == "jpeg"
+        this.retrieveResonse.fileType.toLocaleLowerCase() == "jpg" ||
+        this.retrieveResonse.fileType.toLocaleLowerCase() == "png" ||
+        this.retrieveResonse.fileType.toLocaleLowerCase() == "jpeg"
       ) {
         var blob = new Blob([this._base64ToArrayBuffer(this.base64Data)], {
           type: "image/jpg",
@@ -74,7 +74,7 @@ export class AfficherComponent implements OnInit {
         const url = URL.createObjectURL(blob);
 
         this.retrievedFile = window.open(url);
-      } else if (this.retrieveResonse.fileType == "pdf") {
+      } else if (this.retrieveResonse.fileType.toLocaleLowerCase() == "pdf") {
         var blob = new Blob([this._base64ToArrayBuffer(this.base64Data)], {
           type: "application/pdf",
         });
@@ -86,7 +86,7 @@ export class AfficherComponent implements OnInit {
         const url = URL.createObjectURL(blob);
 
         this.retrievedFile = window.open(url, this.retrieveResonse.fileName);
-      } else if (this.retrieveResonse.fileType == "docx") {
+      } else if (this.retrieveResonse.fileType.toLocaleLowerCase() == "docx") {
         var blob = new Blob([this.base64Data], {
           type:
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
@@ -104,7 +104,7 @@ export class AfficherComponent implements OnInit {
       url +
       "&pid=explorer&efh=false&a=v&chrome=false&embedded=true"
   ); */
-      } else if (this.retrieveResonse.fileType == "mp4") {
+      } else if (this.retrieveResonse.fileType.toLocaleLowerCase() == "mp4") {
         var blob = new Blob([this._base64ToArrayBuffer(this.base64Data)], {
           type: "video/mp4",
         });
@@ -115,7 +115,7 @@ export class AfficherComponent implements OnInit {
         const url = URL.createObjectURL(blob);
         // const url2 = this.sanitizer.bypassSecurityTrustResourceUrl(url);
         this.retrievedFile = window.open(url);
-      } else if (this.retrieveResonse.fileType == "pptx") {
+      } else if (this.retrieveResonse.fileType.toLocaleLowerCase() == "pptx") {
         var blob = new Blob([this._base64ToArrayBuffer(this.base64Data)], {
           type:
             "application/vnd.openxmlformats-officedocument.presentationml.presentation",

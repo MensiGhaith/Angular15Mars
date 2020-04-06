@@ -21,18 +21,19 @@
     "
   >
     <h3></h3>
-    <button
-      class="btn"
-      style="background-color: #09c0a3;"
-      (click)="GetByTag(file.tag)"
-    >
-      Ouvrir
-    </button>
+
     <ul>
       <li><b>Name: </b> {{ file.nom }}</li>
       <li><b>Type: </b> {{ file.type }}</li>
       <li><b>Departement: </b>{{ file.departement }}</li>
       <li><b>Tag: </b>{{ file.tag }}</li>
+      <button
+        class="btn"
+        style="background-color: #09c0a3;"
+        (click)="GetByTag(file.tag)"
+      >
+        Ouvrir
+      </button>
     </ul>
   </div>
 </div>

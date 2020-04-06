@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { UploadFileService } from "app/services/File.service";
 import { map } from "rxjs/operators";
 import { DomSanitizer } from "@angular/platform-browser";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-comet",
@@ -14,19 +15,21 @@ export class CometComponent implements OnInit {
   retrieveResonse: any;
   base64Data: any;
   retrievedFile: any;
+  result: string;
   constructor(
     private tokenStorageService: TokenStorageService,
     private router: Router,
     private uploadService: UploadFileService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private http: HttpClient
   ) {}
   GetByTag(tag: string) {
     this.uploadService.getFile(tag).subscribe((res) => {
       this.retrieveResonse = res;
       this.base64Data = this.retrieveResonse.fileContent;
       if (
-        this.retrieveResonse.fileType.toLocaleLowerCase() == "JPG" ||
-        this.retrieveResonse.fileType == "png" ||
+        this.retrieveResonse.fileType.toLocaleLowerCase() == "jpg" ||
+        this.retrieveResonse.fileType.toLocaleLowerCase() == "png" ||
         this.retrieveResonse.fileType.toLocaleLowerCase() == "jpeg"
       ) {
         var blob = new Blob([this._base64ToArrayBuffer(this.base64Data)], {

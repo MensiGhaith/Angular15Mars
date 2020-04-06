@@ -55,4 +55,7 @@ export class UploadFileService {
       responseType: "text",
     });
   }
+  downloadFile(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/downloadFile/${id}`);
+  }
 }
