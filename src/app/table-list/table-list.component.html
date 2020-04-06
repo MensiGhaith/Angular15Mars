@@ -1,12 +1,27 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-13">
         <div class="card card-plain" data-aos="fade-right">
-          <div class="card-header " style="background-color: #09c0a3;">
-            <h4 class="card-title mt-0" style="color:white;">
+          <div
+            class="card-header"
+            style="background-color: #09c0a3; width: 100%;"
+          >
+            <h4 class="card-title mt-0" style="color: white;">
               Tableau des Utilisateurs
             </h4>
+          </div>
+          <div class="row">
+            <div class="col pull-right">
+              <input
+                type="text"
+                placeholder="Search..."
+                [(ngModel)]="SearchTag"
+                (input)="Search()"
+                style="margin: 20px;"
+              />
+              <div id="toggle"></div>
+            </div>
           </div>
           <div class="card-body">
             <div class="table-responsive">
@@ -22,8 +37,12 @@
                     Prénom
                   </th>
                   <th>
+                    Username
+                  </th>
+                  <th>
                     Email
                   </th>
+
                   <th>
                     Role
                   </th>
@@ -32,7 +51,12 @@
                   </th>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let u of users">
+                  <tr
+                    *ngFor="
+                      let u of filtered
+                        | paginate: { itemsPerPage: 5, currentPage: p }
+                    "
+                  >
                     <td>
                       {{ u.id }}
                     </td>
@@ -42,19 +66,22 @@
                     <td>
                       {{ u.prenom }}
                     </td>
+                    <td>
+                      {{ u.username }}
+                    </td>
                     <td>{{ u.email }}</td>
                     <td>
                       <span *ngFor="let r of u.roles">{{ r }} </span>
                     </td>
                     <td>
                       <button
-                        class="btn btn-danger "
+                        class="btn btn-danger"
                         (click)="deleteEmployee(u.id)"
                       >
                         Supprimer
                       </button>
 
-                      <button class="btn " (click)="OnEdit(u.id)">
+                      <button class="btn" (click)="OnEdit(u.id)">
                         Details
                       </button>
                     </td>
@@ -68,3 +95,8 @@
     </div>
   </div>
 </div>
+<pagination-controls
+  (pageChange)="onPageChange($event)"
+  (pageBoundsCorrection)="onPageChange($event)"
+  style="float: right;"
+></pagination-controls>

@@ -11,17 +11,12 @@ export class UserService {
   private baseUrl = "http://localhost:8080/gp/employees";
   private baseUrl1 = "http://localhost:8080/gp/employees/accepter";
   private baseUrl2 = "http://localhost:8080/gp/DeleteRole";
+  private baseUrl3 = "http://localhost:8080/auth/signup/employees";
 
   constructor(private http: HttpClient) {}
 
   getUser(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
-  }
-
-  createUser(user: User): Observable<Object> {
-    return this.http
-      .post(`${this.baseUrl}`, user)
-      .pipe(retry(1), catchError(this.handleError));
   }
 
   updateEmployee(id: number, value: any): Observable<Object> {
@@ -41,17 +36,5 @@ export class UserService {
 
   getUsersList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
-  }
-  handleError(error) {
-    let errorMessage = "";
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.error.message}`;
-    }
-    window.alert(errorMessage);
-    return throwError(errorMessage);
   }
 }

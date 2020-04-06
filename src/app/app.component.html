@@ -1,2 +1,87 @@
+<nav
+  class="navbar navbar-expand navbar-dark bg-dark"
+  *ngIf="
+    !(
+      this.router.url === '/user-profile' ||
+      this.router.url === '/attente' ||
+      this.router.url === '/table-list' ||
+      this.router.url === '/ajoutFichier' ||
+      this.router.url === '/affiche'
+    )
+  "
+>
+  <a class="navbar-brand" href="#"
+    ><img
+      src="../../assets/img/logo@2x.png"
+      alt=""
+      style="width: 150px; height: 30px;"
+  /></a>
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item" *ngIf="isLoggedIn">
+      <a class="nav-link" routerLink="/home" routerLinkActive="active"
+        >Home <span class="sr-only">(current)</span></a
+      >
+    </li>
+    <li class="nav-item" *ngIf="showAdminBoard">
+      <a class="nav-link" routerLink="/user-profile" routerLinkActive="active"
+        >dashboard</a
+      >
+    </li>
+    <li class="nav-item" *ngIf="showDatahubBoard">
+      <a class="nav-link" routerLink="/datahub" routerLinkActive="active"
+        >Datahub</a
+      >
+    </li>
+    <li class="nav-item" *ngIf="showGpBoard">
+      <a class="nav-link" routerLink="/gp" routerLinkActive="active">GP</a>
+    </li>
+    <li class="nav-item" *ngIf="showCometBoard">
+      <a class="nav-link" routerLink="/comet" routerLinkActive="active"
+        >COMET</a
+      >
+    </li>
+  </ul>
+  <div class="dropdown1">
+    <ul class="navbar-nav mr-auto" *ngIf="isLoggedIn">
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdownMenuLink"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <img src="../../assets/img/profile1.png" alt="profile-icon" />
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#profil"> {{ username }} </a>
+          <a class="dropdown-item" href="/login" (click)="logout()"
+            >Déconnecter</a
+          >
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/upload" routerLinkActive="active"
+          >Upload</a
+        >
+      </li>
+    </ul>
+  </div>
+  <div class="dropdown1">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngIf="!isLoggedIn">
+        <a class="nav-link" routerLink="/register" routerLinkActive="active"
+          >Signup</a
+        >
+      </li>
+      <li class="nav-item" *ngIf="!isLoggedIn">
+        <a class="nav-link" routerLink="/login" routerLinkActive="active"
+          >SignIn</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
 
 <router-outlet></router-outlet>

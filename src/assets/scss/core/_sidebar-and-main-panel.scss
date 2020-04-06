@@ -305,8 +305,12 @@
   &[data-color="azure"] {
     @include set-background-color-button($brand-info);
   }
+
   &[data-color="green"] {
     @include set-background-color-button($brand-success);
+  }
+  &[data-color="neoxam"] {
+    @include set-background-color-button($brand-neoxam);
   }
   &[data-color="orange"] {
     @include set-background-color-button($brand-warning);

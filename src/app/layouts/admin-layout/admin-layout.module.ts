@@ -30,6 +30,7 @@ import { AuthGuard } from "app/services/auth.guard";
 import { UserDetailsComponent } from "../../user-details/user-details.component";
 import { MatRadioModule } from "@angular/material";
 import { MatChipsModule } from "@angular/material/chips";
+import { RoleGuard } from "app/services/role.guard.service";
 
 @NgModule({
   imports: [
@@ -64,6 +65,7 @@ import { MatChipsModule } from "@angular/material/chips";
   providers: [
     AuthService,
     AuthGuard,
+    RoleGuard,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} }
   ],

@@ -8,6 +8,7 @@ import {
   ValidationErrors,
   FormGroup
 } from "@angular/forms";
+import { AuthService } from "app/services/auth.service";
 
 @Component({
   selector: "app-register",
@@ -17,7 +18,11 @@ import {
 export class RegisterComponent implements OnInit {
   user: User = new User();
   submitted = false;
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
   hide = true;
   model: any = {};
 
@@ -30,7 +35,7 @@ export class RegisterComponent implements OnInit {
     var role = new Array();
     role.push(this.user.roles);
     this.user.roles = role;
-    this.userService.createUser(this.user).subscribe(
+    this.authService.register(this.user).subscribe(
       data => {
         alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user, null, 4));
         this.submitted = true;

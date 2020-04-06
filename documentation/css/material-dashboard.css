@@ -18508,6 +18508,13 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14),
     0 7px 10px -5px rgba(0, 188, 212, 0.4);
 }
+.sidebar[data-color="neoxam"] li.active > a {
+  background-color: #09c0a3;
+  -webkit-box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14),
+    0 7px 10px -5px rgba(0, 188, 212, 0.4);
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14),
+    0 7px 10px -5px rgba(0, 188, 212, 0.4);
+}
 .sidebar[data-color="green"] li.active > a {
   background-color: #4caf50;
   -webkit-box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14),

@@ -7,6 +7,7 @@ import { DropZoneComponent } from "app/drop-zone/drop-zone.component";
 import { LoginComponent } from "app/login/login.component";
 import { AfficherComponent } from "app/afficher/afficher.component";
 import { AuthGuard } from "app/services/auth.guard";
+import { RoleGuard } from "app/services/role.guard.service";
 
 export const AdminLayoutRoutes: Routes = [
   // {
@@ -78,6 +79,7 @@ export const AdminLayoutRoutes: Routes = [
     children: [
       {
         path: "table-list",
+
         component: TableListComponent
       }
     ]

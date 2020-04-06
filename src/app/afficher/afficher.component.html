@@ -1,49 +1,64 @@
 <div id="pricing-table" class="clear" data-aos="fade-right">
   <div class="sel">
     <div class="row">
-      <div class="col" style="left:-160px;">
+      <div class="col" style="left: -160px;">
         <input
           type="text"
           placeholder="Search..."
-          [(ngModel)]="tag"
+          [(ngModel)]="SearchTag"
           (input)="Search()"
-          style="margin:20px;
-       
-          
-          "
+          style="margin: 20px;"
         />
-        <div
-          id="toggle"
-          style="
-      
-        left: 450px;
-    "
-        ></div>
+        <div id="toggle" style="left: 450px;"></div>
       </div>
     </div>
   </div>
 
   <div
     class="plan"
-    *ngFor="let file of files | paginate: { itemsPerPage: 8, currentPage: p }"
+    *ngFor="
+      let file of filtered | paginate: { itemsPerPage: 3, currentPage: p }
+    "
+    style="max-width: 468px;"
   >
-    <h3></h3>
-    <button class="btn" style="background-color:#09c0a3;">Ouvrir</button>
     <ul>
-      <li><b>Name: </b> {{ file.fileName }}</li>
-      <li><b>Type: </b> {{ file.fileType }}</li>
-      <li><b>Catégorie: </b>{{ file.categorie }}</li>
-      <li><b>Tag: </b>{{ file.fileTag }}</li>
+      <li><b>Name: </b> {{ file.nom }}</li>
+      <li><b>Type: </b> {{ file.type }}</li>
+      <li><b>Departement: </b>{{ file.departement }}</li>
+      <li><b>Tag: </b>{{ file.tag }}</li>
       <li>
-        <b>Description: </b>
-        <p>
-          {{ file.fileDescription }}
-        </p>
+        <b>
+          <button
+            class="btn"
+            style="background-color: #09c0a3;"
+            (click)="GetByTag(file.tag)"
+          >
+            Ouvrir
+          </button></b
+        >
+      </li>
+      <li>
+        <b>
+          <button class="btn" (click)="OnEdit(file.id)">
+            Modifier
+          </button></b
+        >
+      </li>
+      <li>
+        <b>
+          <button
+            class="btn btn-danger"
+            (click)="deleteFile(file.id); showNotification('top', 'right')"
+          >
+            Supprimer
+          </button></b
+        >
       </li>
     </ul>
   </div>
-  <pagination-controls
-    (pageChange)="p = $event"
-    style="float:right;"
-  ></pagination-controls>
 </div>
+<pagination-controls
+  (pageChange)="onPageChange($event)"
+  (pageBoundsCorrection)="onPageChange($event)"
+  style="float: right;"
+></pagination-controls>

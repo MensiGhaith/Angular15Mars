@@ -1,0 +1,54 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12" data-aos="fade-right">
+        <label class="btn btn-default">
+          <input type="file" (change)="selectFile($event)" />
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4" data-aos="fade-right">
+        <div class="form-group">
+          <label for="form"><h5>Tag</h5></label>
+          <input
+            type="text"
+            class="form-control"
+            id="tag"
+            [(ngModel)]="tag"
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4" data-aos="fade-right">
+        <div class="form-group">
+          <label for="form"><h5>Departement</h5></label>
+          <input
+            type="text"
+            class="form-control"
+            id="dep"
+            [(ngModel)]="dep"
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom: 100px;">
+      <div class="col-md-6">
+        <button
+          class="btn btn-success"
+          [disabled]="!selectedFiles"
+          (click)="upload(); showNotification('bottom', 'center')"
+          style="background-color: #09c0a3;"
+        >
+          Upload
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"></div>
+    </div>
+  </div>
+</div>

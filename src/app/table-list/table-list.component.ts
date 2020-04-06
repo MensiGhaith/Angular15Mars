@@ -10,14 +10,18 @@ import { UserDetailsComponent } from "app/user-details/user-details.component";
 @Component({
   selector: "app-table-list",
   templateUrl: "./table-list.component.html",
-  styleUrls: ["./table-list.component.css"]
+  styleUrls: ["./table-list.component.css"],
 })
 export class TableListComponent implements OnInit {
   users = [];
+  p: number;
+
+  SearchTag: String;
   UsersTest = [];
   userToUpdate: any;
   private updateSubscription: Subscription;
   isPopupOpened = true;
+  filtered: {}[];
 
   constructor(
     private userService: UserService,
@@ -32,19 +36,20 @@ export class TableListComponent implements OnInit {
   reloadData() {
     this.userService
       .getUsersList()
-      .pipe(map(arr => arr && arr.filter(r => r.active == true)))
-      .subscribe(result => {
+      .pipe(map((arr) => arr && arr.filter((r) => r.active == true)))
+      .subscribe((result) => {
         this.users = result;
+        this.filtered = this.users.slice();
       });
   }
 
   deleteEmployee(id: number) {
     this.userService.deleteUser(id).subscribe(
-      data => {
+      (data) => {
         console.log(data);
         this.reloadData();
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 
@@ -68,18 +73,32 @@ export class TableListComponent implements OnInit {
     this.isPopupOpened = true;
     this.userService
       .getUsersList()
-      .pipe(map(arr => arr.filter(r => r.active == true)))
-      .subscribe(users => {
+      .pipe(map((arr) => arr.filter((r) => r.active == true)))
+      .subscribe((users) => {
         this.UsersTest = users;
-        const userToUpdate = users.find(c => c.id === id);
+        const userToUpdate = users.find((c) => c.id === id);
 
         const dialogRef = this.matdialog.open(UserDetailsComponent, {
-          data: userToUpdate
+          data: userToUpdate,
         });
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe((result) => {
           this.isPopupOpened = false;
           this.reloadData();
         });
       });
+  }
+  Search() {
+    this.filtered = this.users.filter((user) => {
+      if (!this.SearchTag) {
+        return true;
+      }
+
+      return user.nom
+        .toLocaleLowerCase()
+        .includes(this.SearchTag.toLocaleLowerCase());
+    });
+  }
+  onPageChange(page: number) {
+    this.p = page;
   }
 }
