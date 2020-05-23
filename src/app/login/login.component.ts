@@ -5,7 +5,7 @@ import { TokenStorageService } from "../services/token-storage.service";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"]
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
   form: any = {};
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.authService.login(this.form).subscribe(
-      data => {
+      (data) => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
 
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         this.roles = this.tokenStorage.getUser().roles;
         this.reloadPage();
       },
-      err => {
+      (err) => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       }

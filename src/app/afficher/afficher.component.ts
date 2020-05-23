@@ -59,8 +59,8 @@ export class AfficherComponent implements OnInit {
   onPageChange(page: number) {
     this.p = page;
   }
-  GetByTag(tag: string) {
-    this.uploadService.getFile(tag).subscribe((res) => {
+  GetById(id: number) {
+    this.uploadService.getFile(id).subscribe((res) => {
       this.retrieveResonse = res;
       this.base64Data = this.retrieveResonse.fileContent;
       if (
@@ -104,16 +104,29 @@ export class AfficherComponent implements OnInit {
       url +
       "&pid=explorer&efh=false&a=v&chrome=false&embedded=true"
   ); */
+      } else if (this.retrieveResonse.fileType.toLocaleLowerCase() == "avi") {
+        var blob = new Blob([this._base64ToArrayBuffer(this.base64Data)], {
+          type: "video/x-msvideo",
+        });
+
+        const url = URL.createObjectURL(blob);
+
+        this.retrievedFile = window.open(url);
       } else if (this.retrieveResonse.fileType.toLocaleLowerCase() == "mp4") {
         var blob = new Blob([this._base64ToArrayBuffer(this.base64Data)], {
           type: "video/mp4",
         });
-        // const url = URL.createObjectURL(blob);
-        // const url2 = this.sanitizer.bypassSecurityTrustResourceUrl(url);
-        // this.url1 = this._base64ToArrayBuffer(url2);
 
         const url = URL.createObjectURL(blob);
-        // const url2 = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+
+        this.retrievedFile = window.open(url);
+      } else if (this.retrieveResonse.fileType.toLocaleLowerCase() == "ogg") {
+        var blob = new Blob([this._base64ToArrayBuffer(this.base64Data)], {
+          type: "video/ogg",
+        });
+
+        const url = URL.createObjectURL(blob);
+
         this.retrievedFile = window.open(url);
       } else if (this.retrieveResonse.fileType.toLocaleLowerCase() == "pptx") {
         var blob = new Blob([this._base64ToArrayBuffer(this.base64Data)], {
@@ -172,7 +185,7 @@ export class AfficherComponent implements OnInit {
         console.log(data);
         this.reloadData();
       },
-      (error) => console.log(error)
+      (error) => alert(error.error.message)
     );
   }
   showNotification(from, align) {

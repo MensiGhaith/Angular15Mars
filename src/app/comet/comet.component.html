@@ -30,9 +30,38 @@
       <button
         class="btn"
         style="background-color: #09c0a3;"
-        (click)="GetByTag(file.tag)"
+        (click)="GetById(file.id)"
+        *ngIf="
+          !(
+            file.type == 'docx' ||
+            file.type == 'pptx' ||
+            file.type == 'ppt' ||
+            file.type == 'doc' ||
+            file.type == 'xls' ||
+            file.type == 'xlsx' ||
+            file.type == 'xlsm' ||
+            file.type == 'xml' ||
+            file.type == 'xlt' ||
+            file.type == 'avi' ||
+            file.type == 'xla'
+          )
+        "
       >
         Ouvrir
+      </button>
+      <button
+        class="btn"
+        style="background-color: #09c0a3;"
+        (click)="Remember(file.id)"
+      >
+        Garder
+      </button>
+      <button
+        class="btn"
+        style="background-color: #09c0a3;"
+        (click)="Download(file.id)"
+      >
+        Télécharger
       </button>
     </ul>
   </div>

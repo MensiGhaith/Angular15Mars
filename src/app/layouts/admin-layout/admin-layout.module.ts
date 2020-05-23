@@ -20,7 +20,7 @@ import {
   MatDialogModule,
   MatCardModule,
   MatToolbarModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
 } from "@angular/material";
 import { EnAttenteComponent } from "app/en-attente/en-attente.component";
 import { DropZoneComponent } from "app/drop-zone/drop-zone.component";
@@ -51,7 +51,7 @@ import { RoleGuard } from "app/services/role.guard.service";
     MatCardModule,
     MatToolbarModule,
     MatChipsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
   ],
   declarations: [
     UserProfileComponent,
@@ -60,15 +60,15 @@ import { RoleGuard } from "app/services/role.guard.service";
     EnAttenteComponent,
     DropZoneComponent,
     AfficherComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
   ],
   providers: [
     AuthService,
     AuthGuard,
     RoleGuard,
     { provide: MAT_DIALOG_DATA, useValue: {} },
-    { provide: MatDialogRef, useValue: {} }
+    { provide: MatDialogRef, useValue: {} },
   ],
-  entryComponents: [UserDetailsComponent]
+  entryComponents: [UserDetailsComponent],
 })
 export class AdminLayoutModule {}

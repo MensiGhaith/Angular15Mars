@@ -1,52 +1,95 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12" data-aos="fade-right">
-        <label class="btn btn-default">
-          <input type="file" (change)="selectFile($event)" />
-        </label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4" data-aos="fade-right">
-        <div class="form-group">
-          <label for="form"><h5>Tag</h5></label>
-          <input
-            type="text"
-            class="form-control"
-            id="tag"
-            [(ngModel)]="tag"
-            required
-          />
+    <form
+      name="form"
+      (ngSubmit)="f.form.valid && OnSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="row">
+        <div class="col-md-12" data-aos="fade-right">
+          <label class="btn btn-default">
+            <input type="file" (change)="selectFile($event)" />
+          </label>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4" data-aos="fade-right">
-        <div class="form-group">
-          <label for="form"><h5>Departement</h5></label>
-          <input
-            type="text"
-            class="form-control"
-            id="dep"
-            [(ngModel)]="dep"
-            required
-          />
+      <div class="row">
+        <div class="col-md-4" data-aos="fade-right">
+          <div class="form-group">
+            <label for="tag"><h5>Tag</h5></label>
+            <input
+              #tagControl="ngModel"
+              type="text"
+              class="form-control"
+              id="tag"
+              name="tagControl"
+              [(ngModel)]="tag"
+              [ngClass]="{ 'is-invalid': f.submitted && tagControl.invalid }"
+              required
+            />
+            <div
+              *ngIf="f.submitted && tagControl.invalid"
+              class="invalid-feedback"
+            >
+              <div *ngIf="tagControl.errors.required">
+                Veuillez remplir le champ ""TAG""
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row" style="margin-bottom: 100px;">
-      <div class="col-md-6">
-        <button
-          class="btn btn-success"
-          [disabled]="!selectedFiles"
-          (click)="upload(); showNotification('bottom', 'center')"
-          style="background-color: #09c0a3;"
-        >
-          Upload
-        </button>
+      <div class="row">
+        <div class="col-md-4" data-aos="fade-right">
+          <label for="form"
+            ><h5>Departement: click to select departement</h5></label
+          >
+          <div class="form-group">
+            <select
+              name="departement"
+              [(ngModel)]="dep"
+              class="form-control selectpicker"
+              #depControl="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && depControl.invalid }"
+              required
+            >
+              <option
+                *ngFor="let departement of departements"
+                [value]="departement"
+                >{{ departement }}</option
+              >
+            </select>
+          </div>
+
+          <div
+            *ngIf="f.submitted && depControl.invalid"
+            class="invalid-feedback"
+          >
+            <div *ngIf="depControl.errors.required">
+              Veuillez selectionner votre departement
+            </div>
+            <small
+              *ngIf="
+                (!depControl.valid && !depControl) ||
+                (!depControl.valid && depControl.dirty)
+              "
+              >Required (Please select Departement).</small
+            >
+          </div>
+        </div>
       </div>
-    </div>
+      <div class="row" style="margin-bottom: 100px;">
+        <div class="col-md-6">
+          <button
+            class="btn btn-success"
+            [disabled]="!selectedFiles"
+            style="background-color: #09c0a3;"
+          >
+            Upload
+          </button>
+        </div>
+      </div>
+    </form>
+
     <div class="row">
       <div class="col-md-12"></div>
     </div>

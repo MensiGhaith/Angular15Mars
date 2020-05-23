@@ -9,42 +9,30 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   {
-    path: "/user-profile",
-    title: "Profil Utilisateur",
-    icon: "person",
-    class: ""
-  },
-  {
     path: "/table-list",
     title: "Liste des utilisateurs",
     icon: "content_paste",
-    class: ""
+    class: "",
   },
   {
     path: "/attente",
     title: "En Attente",
     icon: "notifications",
-    class: ""
-  },
-  {
-    path: "/ajoutFichier",
-    title: "Ajouter Fichier",
-    icon: "library_books ",
-    class: ""
+    class: "",
   },
 
   {
     path: "/affiche",
     title: "Affiche",
     icon: "library_books",
-    class: ""
-  }
+    class: "",
+  },
 ];
 
 @Component({
   selector: "app-sidebar",
   templateUrl: "./sidebar.component.html",
-  styleUrls: ["./sidebar.component.css"]
+  styleUrls: ["./sidebar.component.css"],
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
@@ -52,7 +40,7 @@ export class SidebarComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.menuItems = ROUTES.filter((menuItem) => menuItem);
   }
   isMobileMenu() {
     if ($(window).width() > 991) {

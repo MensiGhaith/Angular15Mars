@@ -3,15 +3,13 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card" data-aos="fade-right">
-          <div class="card-header ">
+          <div class="card-header">
             <mat-icon class="pull-right" (click)="onNoClick()">cancel</mat-icon>
             <h4 class="card-title">Editer Profil</h4>
-            <p class="card-category" style="color:white;">
+            <p class="card-category" style="color: white;">
               Editer Utilisateur
             </p>
           </div>
-
-          {{ _contactForm.value | json }}
 
           <form [formGroup]="_contactForm" (submit)="onSubmit()">
             <div class="card-body">
@@ -98,12 +96,11 @@
                     </mat-form-field>
                   </div>
                 </div>
-                <span> {{ _contactForm.value.id }} </span>
                 <button
                   mat-raised-button
                   type="submit"
                   style="background-color: #09c0a3;"
-                  class="btn  pull-right"
+                  class="btn pull-right"
                 >
                   Modifier Profil
                 </button>

@@ -47,6 +47,7 @@ import {
 } from "@angular/material";
 import { CometComponent } from "./comet/comet.component";
 import { FileDetailsComponent } from "./file-details/file-details.component";
+import { InputTrimDirective } from "./directives/trimmer.directive";
 
 @NgModule({
   imports: [
@@ -90,6 +91,7 @@ import { FileDetailsComponent } from "./file-details/file-details.component";
     ProfilComponent,
     CometComponent,
     FileDetailsComponent,
+    InputTrimDirective,
   ],
 
   providers: [

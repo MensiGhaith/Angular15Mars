@@ -6,14 +6,14 @@ import {
   NG_VALIDATORS,
   Validator,
   ValidationErrors,
-  FormGroup
+  FormGroup,
 } from "@angular/forms";
 import { AuthService } from "app/services/auth.service";
 
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
-  styleUrls: ["./register.component.scss"]
+  styleUrls: ["./register.component.scss"],
 })
 export class RegisterComponent implements OnInit {
   user: User = new User();
@@ -32,16 +32,20 @@ export class RegisterComponent implements OnInit {
     this.user = new User();
   }
   save() {
-    var role = new Array();
-    role.push(this.user.roles);
-    this.user.roles = role;
+    const rolearray = this.user.roles;
+    if (!Array.isArray(rolearray)) {
+      var role = new Array();
+      role.push(this.user.roles);
+      this.user.roles = role;
+    }
+
     this.authService.register(this.user).subscribe(
-      data => {
-        alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user, null, 4));
+      (data) => {
+        alert("SUCCESS!! :-)\n\n");
         this.submitted = true;
         this.gotoList();
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 

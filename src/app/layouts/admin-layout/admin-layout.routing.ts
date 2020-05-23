@@ -58,9 +58,9 @@ export const AdminLayoutRoutes: Routes = [
     children: [
       {
         path: "affiche",
-        component: AfficherComponent
-      }
-    ]
+        component: AfficherComponent,
+      },
+    ],
   },
   {
     path: "",
@@ -68,9 +68,9 @@ export const AdminLayoutRoutes: Routes = [
     children: [
       {
         path: "user-profile",
-        component: UserProfileComponent
-      }
-    ]
+        component: UserProfileComponent,
+      },
+    ],
   },
 
   {
@@ -80,9 +80,9 @@ export const AdminLayoutRoutes: Routes = [
       {
         path: "table-list",
 
-        component: TableListComponent
-      }
-    ]
+        component: TableListComponent,
+      },
+    ],
   },
   {
     path: "",
@@ -90,9 +90,9 @@ export const AdminLayoutRoutes: Routes = [
     children: [
       {
         path: "attente",
-        component: EnAttenteComponent
-      }
-    ]
+        component: EnAttenteComponent,
+      },
+    ],
   },
   {
     path: "",
@@ -100,8 +100,8 @@ export const AdminLayoutRoutes: Routes = [
     children: [
       {
         path: "ajoutFichier",
-        component: DropZoneComponent
-      }
-    ]
-  }
+        component: DropZoneComponent,
+      },
+    ],
+  },
 ];

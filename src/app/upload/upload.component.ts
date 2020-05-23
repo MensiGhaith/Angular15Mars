@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { HttpEventType, HttpResponse } from "@angular/common/http";
 import { UploadFileService } from "app/services/File.service";
 import { Observable } from "rxjs";
+import { TokenStorageService } from "app/services/token-storage.service";
 declare var $: any;
 
 @Component({
@@ -10,6 +11,7 @@ declare var $: any;
   styleUrls: ["./upload.component.scss"],
 })
 export class UploadComponent implements OnInit {
+  departements: any = [];
   images: any = [];
   allfiles: any = [];
   selectedFiles: FileList;
@@ -21,22 +23,33 @@ export class UploadComponent implements OnInit {
 
   fileInfos: Observable<any>;
 
-  constructor(private uploadService: UploadFileService) {}
+  constructor(
+    private uploadService: UploadFileService,
+    private tokenStorageService: TokenStorageService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.departements = this.tokenStorageService.getUser().roles;
+  }
   selectFile(event) {
     this.selectedFiles = event.target.files;
   }
 
-  upload() {
+  OnSubmit() {
     this.currentFile = this.selectedFiles.item(0);
     this.uploadService
-      .OnUpload(this.currentFile, this.tag, this.dep)
+      .OnUpload(
+        this.currentFile,
+        this.tag,
+        this.dep,
+        this.tokenStorageService.getUser().email,
+        this.tokenStorageService.getUser().id
+      )
       .subscribe((response) => {
-        if (response.status === 200) {
-          this.message = "Image uploaded successfully";
-        } else {
-          this.message = "Image not uploaded successfully";
+        if (response.body == true) {
+          this.showNotification("bottom", "center");
+        } else if (response.body == false) {
+          alert(" Changer Votre TAG svp");
         }
       });
 
@@ -48,7 +61,7 @@ export class UploadComponent implements OnInit {
     $.notify(
       {
         icon: "notifications",
-        message: "Fichier Ajouté avec succès",
+        message: "fichier charger avec succès",
       },
       {
         type: "success",

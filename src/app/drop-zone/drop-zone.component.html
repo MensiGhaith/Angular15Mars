@@ -2,23 +2,47 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12" data-aos="fade-right">
-        <div *ngIf="currentFile" class="progress">
-          <div
-            class="progress-bar progress-bar-info progress-bar-striped"
-            role="progressbar"
-            attr.aria-valuenow="{{ progress }}"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            [ngStyle]="{ width: progress + '%' }"
-          >
-            {{ progress }}%
-          </div>
-        </div>
-
         <label class="btn btn-default">
           <input type="file" (change)="selectFile($event)" />
         </label>
-
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4" data-aos="fade-right">
+        <div class="form-group">
+          <label for="form"><h5>Tag</h5></label>
+          <input
+            type="text"
+            class="form-control"
+            id="tag"
+            [(ngModel)]="tag"
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4" data-aos="fade-right">
+        <label for="form"
+          ><h5>Departement: click to select departement</h5></label
+        >
+        <div class="form-group">
+          <select
+            name="departement"
+            [(ngModel)]="dep"
+            class="form-control selectpicker"
+          >
+            <option
+              *ngFor="let departement of departements"
+              [value]="departement"
+              >{{ departement }}</option
+            >
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom: 100px;">
+      <div class="col-md-6">
         <button
           class="btn btn-success"
           [disabled]="!selectedFiles"
@@ -27,23 +51,10 @@
         >
           Upload
         </button>
-
-        <div class="alert alert-light" role="alert">{{ message }}</div>
-
-        <div class="card">
-          <div class="card-header">
-            List of Files
-          </div>
-          <ul
-            class="list-group list-group-flush"
-            *ngFor="let file of fileInfos | async"
-          >
-            <li class="list-group-item">
-              <a href="{{ file.url }}">{{ file.name }}</a>
-            </li>
-          </ul>
-        </div>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"></div>
     </div>
   </div>
 </div>

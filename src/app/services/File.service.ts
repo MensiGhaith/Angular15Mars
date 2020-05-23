@@ -12,13 +12,21 @@ import { Observable } from "rxjs";
 })
 export class UploadFileService {
   private baseUrl = "http://localhost:8080/gp";
-  OnUpload(selectedFile: File, tag: string, dep: string): Observable<any> {
+  OnUpload(
+    selectedFile: File,
+    tag: string,
+    dep: string,
+    username: string,
+    id: any
+  ): Observable<any> {
     const uploadImageData = new FormData();
     uploadImageData.append("file", selectedFile, selectedFile.name);
     uploadImageData.append("tag", tag);
     uploadImageData.append("dep", dep);
+    uploadImageData.append("username", username);
+    uploadImageData.append("id", id);
 
-    //Make a call to the Spring Boot Application to save the image
+    //Make a call to the Spring Boot Application to save the file
     return this.http.post("http://localhost:8080/gp/do", uploadImageData, {
       observe: "response",
     });
@@ -44,8 +52,11 @@ export class UploadFileService {
   getFiles(): Observable<any> {
     return this.http.get(`${this.baseUrl}/files`);
   }
-  getFile(tag: string) {
-    return this.http.get("http://localhost:8080/gp/get/" + tag);
+  getFile(id: number) {
+    return this.http.get("http://localhost:8080/gp/get/" + id);
+  }
+  getFileById(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/files/${id}`);
   }
   updateFile(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/filesUpdate/${id}`, value);

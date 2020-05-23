@@ -1,8 +1,6 @@
-{{ user | json }}
-
 <div class="myform">
-  <h3 style="color:white;">Création d'un compte</h3>
-  <div [hidden]="submitted" style="width: 400px;">
+  <h3 style="color: white;">Création d'un compte</h3>
+  <div [hidden]="submitted" style="width: 370px;">
     <form
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
@@ -57,6 +55,7 @@
           [(ngModel)]="user.username"
           name="username"
           #username="ngModel"
+          [trim]="user.username"
           [ngClass]="{ 'is-invalid': f.submitted && username.invalid }"
         />
         <div *ngIf="f.submitted && username.invalid" class="invalid-feedback">
@@ -77,6 +76,7 @@
           [(ngModel)]="user.password"
           name="password"
           #password="ngModel"
+          minlength="6"
           [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
         />
         <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
@@ -122,6 +122,7 @@
           name="roles"
           [(ngModel)]="user.roles"
           #roles="ngModel"
+          required
           [ngClass]="{ 'is-invalid': f.submitted && roles.invalid }"
         >
           <option value="GP">GP</option>
@@ -134,6 +135,9 @@
         <div *ngIf="roles.errors.required">
           Veuillez selectionner votre rôle
         </div>
+        <small *ngIf="(!roles.valid && !roles) || (!roles.valid && roles.dirty)"
+          >Required (Please select Departement).</small
+        >
       </div>
 
       <button
@@ -146,7 +150,7 @@
     </form>
   </div>
 
-  <div [hidden]="!submitted" style="color:white;">
+  <div [hidden]="!submitted" style="color: white;">
     <h4>You submitted successfully!</h4>
     <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
   </div>

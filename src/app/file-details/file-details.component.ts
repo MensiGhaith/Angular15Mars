@@ -51,9 +51,7 @@ export class FileDetailsComponent implements OnInit {
 
         this.dialogRef.close();
       },
-      (error: HttpErrorResponse) => {
-        console.error(error.message);
-      }
+      (error) => alert(error.error.message)
     );
   }
 }
