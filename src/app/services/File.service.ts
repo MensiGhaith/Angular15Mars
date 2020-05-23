@@ -16,15 +16,13 @@ export class UploadFileService {
     selectedFile: File,
     tag: string,
     dep: string,
-    username: string,
-    id: any
+    username: string
   ): Observable<any> {
     const uploadImageData = new FormData();
     uploadImageData.append("file", selectedFile, selectedFile.name);
     uploadImageData.append("tag", tag);
     uploadImageData.append("dep", dep);
     uploadImageData.append("username", username);
-    uploadImageData.append("id", id);
 
     //Make a call to the Spring Boot Application to save the file
     return this.http.post("http://localhost:8080/gp/do", uploadImageData, {

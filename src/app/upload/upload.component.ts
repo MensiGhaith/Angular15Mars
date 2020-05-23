@@ -42,8 +42,7 @@ export class UploadComponent implements OnInit {
         this.currentFile,
         this.tag,
         this.dep,
-        this.tokenStorageService.getUser().email,
-        this.tokenStorageService.getUser().id
+        this.tokenStorageService.getUser().email
       )
       .subscribe((response) => {
         if (response.body == true) {
