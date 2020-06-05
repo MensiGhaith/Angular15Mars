@@ -11,7 +11,7 @@ import { AppComponent } from "./app.component";
 
 import { UserProfileComponent } from "./user-profile/user-profile.component";
 import { TableListComponent } from "./table-list/table-list.component";
-import { NotificationsComponent } from "./notifications/notifications.component";
+
 import { AgmCoreModule } from "@agm/core";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { EnAttenteComponent } from "./en-attente/en-attente.component";
@@ -75,9 +75,6 @@ import { InputTrimDirective } from "./directives/trimmer.directive";
     MatAutocompleteModule,
     RouterModule,
     AppRoutingModule,
-    AgmCoreModule.forRoot({
-      apiKey: "YOUR_GOOGLE_MAPS_API_KEY",
-    }),
   ],
   declarations: [
     AppComponent,

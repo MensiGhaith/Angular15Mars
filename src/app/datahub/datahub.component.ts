@@ -115,7 +115,7 @@ export class DatahubComponent implements OnInit {
         fileLink.click();
         console.log(this.retrieveResonse.name);
       } else if (this.retrieveResonse.fileType.toLocaleLowerCase() == "docx") {
-        var blob = new Blob([this.base64Data], {
+        var blob = new Blob([this._base64ToArrayBuffer(this.base64Data)], {
           type:
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         });

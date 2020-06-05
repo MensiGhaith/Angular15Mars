@@ -201,7 +201,7 @@ export class HomeComponent implements OnInit {
         } else if (
           this.retrieveResonse.fileType.toLocaleLowerCase() == "docx"
         ) {
-          var blob = new Blob([this.base64Data], {
+          var blob = new Blob([this._base64ToArrayBuffer(this.base64Data)], {
             type:
               "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
           });
